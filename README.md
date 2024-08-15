@@ -136,7 +136,7 @@ For the end-to-end version, there will be a single PDB output having estimated r
 ## Additional Information
 This additional information is here in case some libraries did not get installed:
 
-If you do not have pytoch install then you can isntall it using this command with a linux system:
+If you do not have pytoch install, or it did not install properly then you can install it using this command with a linux system:
 ```
 conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 ```
