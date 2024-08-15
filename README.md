@@ -1,6 +1,29 @@
-# *RoseTTAFold* 
+# *Installing RoseTTAFold on an HPC Without Sudo Permissions* 
 This package contains deep learning models and related scripts to run RoseTTAFold.  
-This repository is the official implementation of RoseTTAFold: Accurate prediction of protein structures and interactions using a 3-track network.
+This repository is the official implementation of RoseTTAFold: Accurate prediction of protein structures and interactions using a 3-track network. This guide will help you install RoseTTAFold on an HPC system without using sudo permissions or Docker, utilizing CUDA 11.8 and miniconda3. Follow each step carefully.
+
+## Prerequisites
+
+1. Ensure you have an account on your HPC.
+
+2. Request access to a GPU partition compatible with CUDA 11.8.
+
+## Step 1: Log into your HPC System
+
+Open terminal and do this command specific to your own HPC and username:
+```
+ssh <your_username>@<your_hpc_address>
+```
+Please remember to replace `<your_username>` with your actual HPC username and `<your_hpc_address>` with the address of your HPC.
+
+## Step 2: Load the Necessary Modules
+
+Before continuing we need to load some modules:
+```
+module load nvidia/cuda/11.8
+module load miniconda3
+module load gnu11
+```
 
 ## Installation
 
@@ -10,23 +33,20 @@ git clone https://github.com/RosettaCommons/RoseTTAFold.git
 cd RoseTTAFold
 ```
 
-2. Create conda environment using `RoseTTAFold-linux.yml` file and `folding-linux.yml` file. The latter is required to run a pyrosetta version only (run_pyrosetta_ver.sh).
+2. Create conda environment using `RoseTTAFold-linux.yml` file.
 ```
-# create conda environment for RoseTTAFold
-#   If your NVIDIA driver compatible with cuda11
+# create conda environment for RoseTTAFold, cuda11 is required for this step
 conda env create -f RoseTTAFold-linux.yml
-#   If not (but compatible with cuda10)
-conda env create -f RoseTTAFold-linux-cu101.yml
-
-# create conda environment for pyRosetta folding & running DeepAccNet
-conda env create -f folding-linux.yml
 ```
 
-3. Download network weights (under Rosetta-DL Software license -- please see below)  
-While the code is licensed under the MIT License, the trained weights and data for RoseTTAFold are made available for non-commercial use only under the terms of the Rosetta-DL Software license. You can find details at https://files.ipd.uw.edu/pub/RoseTTAFold/Rosetta-DL_LICENSE.txt
+Then we need to activate the environment:
 
-[Update Nov/02/2021] It's now including the weights (RF2t.pt) for RoseTTAFold-2track model used for yeast PPI screening. If you want to use it, please re-download weights. The original RoseTTAFold weights are not changed.
+```
+conda activate RoseTTAFold
+```
 
+3. Download network weights
+Once we've activated our conda environment we can move on to downloading the network weights:
 ```
 wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
 tar xfz weights.tar.gz
@@ -55,26 +75,7 @@ tar xfz pdb100_2021Mar03.tar.gz
 # for CASP14 benchmarks, we used this one: https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2020Mar11.tar.gz
 ```
 
-6. Obtain a [PyRosetta licence](https://els2.comotion.uw.edu/product/pyrosetta) and install the package in the newly created `folding` conda environment ([link](http://www.pyrosetta.org/downloads)).
-
-## Usage
-
-```
-# For monomer structure prediction
-cd example
-../run_[pyrosetta, e2e]_ver.sh input.fa .
-
-# For complex modeling
-# please see README file under example/complex_modeling/README for details.
-python network/predict_complex.py -i paired.a3m -o complex -Ls 218 310 
-
-# For PPI screening using faster 2-track version (example input and output are at example/complex_2track)
-python network_2track/predict_msa.py -msa [paired MSA file in a3m format] -npz [output npz file name] -L1 [Length of first chain]
-e.g. python network_2track/predict_msa.py -msa input.a3m -npz complex.npz -L1 218
-```
-
 ## Expected outputs
-For the pyrosetta version, user will get five final models having estimated CA rms error at the B-factor column (model/model_[1-5].crderr.pdb).  
 For the end-to-end version, there will be a single PDB output having estimated residue-wise CA-lddt at the B-factor column (t000_.e2e.pdb).
 
 ## FAQ
@@ -85,6 +86,7 @@ For easy install, we used a statically compiled version of hhsuite (installed th
 The modeling pipeline provided here (run_pyrosetta_ver.sh/run_e2e_ver.sh) is a kind of guidelines to show how RoseTTAFold works. For more efficient use of computing resources, you might want to modify the provided bash script to submit separate jobs with proper dependencies for each of steps (more cpus/memory for hhblits/hhsearch, using gpus only for running the networks, etc). 
 
 ## Links:
+
 
 * [Robetta server](https://robetta.bakerlab.org/) (RoseTTAFold option)
 * [RoseTTAFold models for CASP14 targets](https://files.ipd.uw.edu/pub/RoseTTAFold/casp14_models.tar.gz) [input MSA and hhsearch files are included]
