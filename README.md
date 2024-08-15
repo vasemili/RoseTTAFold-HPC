@@ -133,6 +133,27 @@ Or you can monitor the logs by going to your output folder and clicking the logs
 ## Expected outputs
 For the end-to-end version, there will be a single PDB output having estimated residue-wise CA-lddt at the B-factor column (t000_.e2e.pdb).
 
+## Additional Information
+This additional information is here in case some libraries did not get installed:
+
+If you do not have pytoch install then you can isntall it using this command with a linux system:
+```
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+```
+If that did not work then you have different settings, and you need to go this page: `https://pytorch.org/get-started/locally/` to see the specific command for your system.
+
+If you do not have psipred installed:
+```
+conda install biocore::psipred
+```
+
+If you do not have hhsuite installed:
+```
+conda install -c conda-forge -c bioconda hhsuite
+```
+
+
+
 ## FAQ
 1. Segmentation fault while running hhblits/hhsearch  
 For easy install, we used a statically compiled version of hhsuite (installed through conda). Currently, we're not sure what exactly causes segmentation fault error in some cases, but we found that it might be resolved if you compile hhsuite from source and use this compiled version instead of conda version. For installation of hhsuite, please see [here](https://github.com/soedinglab/hh-suite).
