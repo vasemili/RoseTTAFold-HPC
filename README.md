@@ -45,7 +45,8 @@ Then we need to activate the environment:
 conda activate RoseTTAFold
 ```
 
-3. Download network weights
+3. Download Neural Network weights
+
 Once we've activated our conda environment we can move on to downloading the network weights:
 ```
 wget https://files.ipd.uw.edu/pub/RoseTTAFold/weights.tar.gz
