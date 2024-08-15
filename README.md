@@ -78,7 +78,7 @@ tar xfz pdb100_2021Mar03.tar.gz
 ## Running RoseTTAFold
 Before running RoseTTAFold, you need to make sure the output directory is correctly configured in the `run_e2e_ver.sh` script:
 
-Edit the working directory in the script: 
+Edit the working directory in the script, this should be on line 35: 
 ```
 WDIR=$(realpath -s "/home/vasemili/outputs_RoseTTAFold/output_$BASENAME") # working folder based on input file name
 ```
