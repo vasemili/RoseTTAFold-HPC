@@ -75,6 +75,61 @@ tar xfz pdb100_2021Mar03.tar.gz
 # for CASP14 benchmarks, we used this one: https://files.ipd.uw.edu/pub/RoseTTAFold/pdb100_2020Mar11.tar.gz
 ```
 
+## Running RoseTTAFold
+Before running RoseTTAFold, you need to make sure the output directory is correctly configured in the `run_e2e_ver.sh` script:
+
+Edit the working directory in the script: 
+```
+WDIR=$(realpath -s "/home/vasemili/outputs_RoseTTAFold/output_$BASENAME") # working folder based on input file name
+```
+
+Update it to your own specific output folder. Replace `/home/vasemili/outputs_RoseTTAFold/output_$BASENAME` with the path to your desired output directory. If you haven't created an output directory yet, do so now. It should follow the same structure:
+
+```
+WDIR=$(realpath -s "/path/to/your/output_directory/output_$BASENAME")
+```
+
+The `output_$BASENAME` part ensures that your output folder will be named based on the input FASTA file. For instance, if your input file is called example2.fasta, the output folder will be named `output_example2`.
+
+Make sure that the modules required at the start are loaded, now we want to make a SLURM script to run the RoseTTAFold. The directory this script should be in, should be in your RoseTTAFold folder. You can create your own with different specific components, but it should look something like this with your own specific fasta file and input directories:
+```
+#!/bin/bash
+#SBATCH --job-name=SUBMIT-ROSETTA         # Job name
+#SBATCH --partition=gpu                 # Partition (all, cpu, gpu)
+#SBATCH --cpus-per-task=1             # Number of cores per MPI task
+#SBATCH --nodes=1                       # Maximum number of nodes to be allocated
+#SBATCH --ntasks=1                      # Number of MPI tasks (i.e. processes)
+#SBATCH --ntasks-per-node=1            # Maximum number of tasks on each node
+#SBATCH --gpus=1                        # count of GPUs required for the job
+#SBATCH --output=example2.%j.out   # Path to the standard output and error files relative to the working directory
+#SBATCH --error=example2.%j.err    # Path to the error files relative to the working directory
+#SBATCH --mem=100G
+
+module purge
+module load nvidia/cuda/11.8
+module load gnu11
+module load miniconda3
+eval "$(conda shell.bash hook)"
+conda activate rosettafold
+
+export OMP_NUM_THREADS=1
+
+#python3 pytorch_example.py
+./run_e2e_ver.sh ../inputs_RoseTTAFold/example2.fasta # Path to inputs directory and then your fasta file
+```
+
+Once we create this file name it `slurm-example.sh` and to run it we just have to run this command:
+```
+sbatch slurm-example.sh
+```
+
+You can monitor the Job:
+```
+squeue -u <your_username>
+```
+
+Or you can monitor the logs by going to your output folder and clicking the logs for your specific fasta file.
+
 ## Expected outputs
 For the end-to-end version, there will be a single PDB output having estimated residue-wise CA-lddt at the B-factor column (t000_.e2e.pdb).
 
