@@ -244,10 +244,11 @@ color sky blue #1
 
 The sky blue command is there just in case you inputted PDB files in different order.
 
-You can use the command line in Chimera to highlight specific residues around the mutation site:
+You can use the command line in Chimera to highlight specific residues around the mutation site (in our case it should be position 34):
 
 ```
-color red :50-55
+select :34
+color red :34
 ```
 
 This is the final visualization you should see:
