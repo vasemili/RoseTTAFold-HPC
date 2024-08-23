@@ -211,9 +211,39 @@ Open up your Chimera locally once downloaded and input your PDB files, and this 
 
 To visually compare the wild-type and mutant protein structures, follow these steps using UCSF Chimera:
 
-**Open both PDB files**
-This is what you should see once both files are open:
+**Open both PDB files with Chimera**
+This is what you should see once both files are open on Chimera:
 ![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/ComparingPDBs.png)
+
+**Step 2: Superimpose the Structures**
+Use the command line (under Favorites > Command Line) and run:
+
+```
+matchmaker #0 #1
+```
+
+This aligns the structures based on their residues. You should get *RMSD between 130 pruned atom pairs is 0.073 angstroms; (across all 130 pairs: 0.073)" for the residuals*. Meaning the structurals are very identical. This is the visualization you should get:
+
+![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/MatchedPDBs.png)
+
+**Visualizing Differences:**
+
+Rotate and zoom into regions of interest to see how the mutation affects the structure. You can color different parts of the structures for better visualization, run this on the Chimera command line:
+
+```
+color hot pink #0
+color sky blue #1
+```
+
+You can use the command line in Chimera to highlight specific residues around the mutation site:
+
+```
+color red :50-55
+```
+
+This is the final visualization you should see:
+
+![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/FocusedMatchPDBs.png)
 
 
 ## Additional Information
