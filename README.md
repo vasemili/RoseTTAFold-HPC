@@ -2,6 +2,8 @@
 This package contains deep learning models and related scripts to run RoseTTAFold.  
 This repository is the official implementation of RoseTTAFold: Accurate prediction of protein structures and interactions using a 3-track network. This guide will help you install RoseTTAFold on an HPC system without using sudo permissions or Docker, utilizing CUDA 11.8 and miniconda3. Follow each step carefully.
 
+This installation guide builds upon the resources provided by the [RoseTTAFold Commons](https://github.com/RosettaCommons/RoseTTAFold).
+
 ## Prerequisites
 
 1. Ensure you have an account on your HPC.
@@ -79,13 +81,9 @@ tar xfz pdb100_2021Mar03.tar.gz
 ## Running RoseTTAFold
 Before running RoseTTAFold, you need to make sure the output directory is correctly configured in the `run_e2e_ver.sh` script:
 
+Update the `run_e2e_ver.sh` script to your own specific output folder. Replace `/path/to/your/output_directory/output_$BASENAME` with the path to your desired output directory. If you haven't created an output directory yet, do so now. It should follow the same structure:
+
 Edit the working directory in the script, this should be on line 35: 
-```
-WDIR=$(realpath -s "/home/vasemili/outputs_RoseTTAFold/output_$BASENAME") # working folder based on input file name
-```
-
-Update it to your own specific output folder. Replace `/home/vasemili/outputs_RoseTTAFold/output_$BASENAME` with the path to your desired output directory. If you haven't created an output directory yet, do so now. It should follow the same structure:
-
 ```
 WDIR=$(realpath -s "/path/to/your/output_directory/output_$BASENAME")
 ```
@@ -93,6 +91,17 @@ WDIR=$(realpath -s "/path/to/your/output_directory/output_$BASENAME")
 The `output_$BASENAME` part ensures that your output folder will be named based on the input FASTA file. For instance, if your input file is called example2.fasta, the output folder will be named `output_example2`.
 
 Make sure that the modules required at the start are loaded, now we want to make a SLURM script to run the RoseTTAFold. The directory this script should be in, should be in your RoseTTAFold folder. You can create your own with different specific components, but it should look something like this with your own specific fasta file and input directories:
+
+1. Partition (`--partition`): Choose a partition optimized for GPU use (gpu).
+
+2. Memory (`--mem`): Allocate sufficient memory (e.g., 100G) based on your inputs.
+
+3. GPU Allocation (`--gpus`): Typically, 1 GPU is sufficient (--gpus=1).
+
+4. CPU Threads (`--cpus-per-task`): Set to 1 if running a single-threaded job.
+
+5. Output and Error Files: Customize file names to avoid overwriting (%j adds the job ID).
+
 ```
 #!/bin/bash
 #SBATCH --job-name=SUBMIT-ROSETTA         # Job name
