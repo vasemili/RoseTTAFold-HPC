@@ -253,7 +253,7 @@ color red :34
 
 This is the final visualization you should see:
 
-![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/FocusedMatchPDBs.png)
+![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/FocusedMatchPDB.png)
 
 
 ## Additional Information
