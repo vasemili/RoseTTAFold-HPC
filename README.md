@@ -199,7 +199,7 @@ scp -r your_username@your_hpc_address:/path/to/your/output/files /path/to/your/l
 
 Open up your Chimera and input your PDB files, and this is what you should see:
 
-[Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/examples/RoseTTAFold-image.png)
+[Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/examples/RoseTTAFoldimage.png)
 
 
 ## Additional Information
