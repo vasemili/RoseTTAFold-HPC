@@ -25,6 +25,7 @@ Before continuing we need to load some modules:
 module load nvidia/cuda/11.8
 module load miniconda3
 module load gnu11
+module load aria2
 ```
 
 ## Installation
