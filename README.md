@@ -187,7 +187,7 @@ conda activate rosettafold
 
 # Running RoseTTAFold for both the wild-type and mutant sequences
 ./run_e2e_ver.sh ../inputs_RoseTTAFold/wild_type.fasta
-./run_e2e_ver.sh ../inputs_RoseTTAFold/mutant.fasta
+./run_e2e_ver.sh ../inputs_RoseTTAFold/1JKB.fasta
 ```
 
 3. Visualizing the prediction
@@ -197,9 +197,24 @@ For this step if you do not have Chimera on your HPC, you can transport the outp
 scp -r your_username@your_hpc_address:/path/to/your/output/files /path/to/your/local/directory
 ```
 
-Open up your Chimera and input your PDB files, and this is what you should see:
+Installing Chimera locally: [Download UCSF Chimera](https://www.cgl.ucsf.edu/chimera/download.html)
 
+Open up your Chimera locally once downloaded and input your PDB files, and this is what you should see:
+
+**1JKB PDB Files:**
+![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/RoseTTAFoldimage.png)
+
+**Wild Type PDB Files:**
 ![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/RoseTTAFoldWildimage.png)
+
+4. Comparing the Structural Differences:
+
+To visually compare the wild-type and mutant protein structures, follow these steps using UCSF Chimera:
+
+**Open both PDB files**
+This is what you should see once both files are open:
+![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/ComparingPDBs.png)
+
 
 ## Additional Information
 This additional information is here in case some libraries did not get installed:
