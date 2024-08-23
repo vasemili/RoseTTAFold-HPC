@@ -152,12 +152,14 @@ In this section, we’ll demonstrate how to predict protein structures using Ros
 You’ll need two FASTA files as input:
 
 Wild type:
+
 ```
 >Wild type LYSOZYME|Homo sapiens
 KVFERCELARTLKRLGMDGYRGISLANWMCLAKWESGYNTRATNYNAGDRSTDYGIFQINSRYWCNDGKTPGAVNACHLSCSALLQDNIADAVACAKRVVRDPQGIRAWVAWRNRCQNRDVRQYVQGCGV
 ```
 
 1JKB type:
+
 ```
 >1JKB LYSOZYME|Homo sapiens
 KVFERCELARTLKRLGMDGYRGISLANWMCLAKWASGYNTRATNYNAGDRSTDYGIFQINSRYWCNDGKTPGAVNACHLSCSALLQDNIADAVACAKRVVRDPQGIRAWVAWRNRCQNRDVRQYVQGCGV
@@ -202,9 +204,11 @@ Installing Chimera locally: [Download UCSF Chimera](https://www.cgl.ucsf.edu/chi
 Open up your Chimera locally once downloaded and input your PDB files, and this is what you should see:
 
 **1JKB PDB Files:**
+
 ![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/RoseTTAFoldimage.png)
 
 **Wild Type PDB Files:**
+
 ![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/RoseTTAFoldWildimage.png)
 
 4. Comparing the Structural Differences:
@@ -214,6 +218,7 @@ To visually compare the wild-type and mutant protein structures, follow these st
 **Step 1: Open both PDB files with Chimera**
 
 This is what you should see once both files are open on Chimera:
+
 ![Lysozyme Structure](https://github.com/vasemili/RoseTTAFold-HPC/blob/main/examples/ComparingPDBs.png)
 
 **Step 2: Superimpose the Structures**
