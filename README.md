@@ -242,6 +242,8 @@ color hot pink #0
 color sky blue #1
 ```
 
+The sky blue command is there just in case you inputted PDB files in different order.
+
 You can use the command line in Chimera to highlight specific residues around the mutation site:
 
 ```
