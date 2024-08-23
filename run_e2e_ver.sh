@@ -32,7 +32,7 @@ MEM="64" # max memory (in GB)
 IN="$1"                # input.fasta
 chmod u+r "$IN"        # ensure the input FASTA file is readable
 BASENAME=$(basename "$IN" .fasta) # base name of the input file without extension
-WDIR=$(realpath -s "/home/vasemili/outputs_RoseTTAFold/output_$BASENAME") # working folder based on input file name
+WDIR=$(realpath -s "/path/to/your/output_directory/output_$BASENAME") # working folder based on input file name
 
 echo "Running end-to-end prediction"
 echo "Current Python executable: $(which python)"
